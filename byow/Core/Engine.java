@@ -3,11 +3,11 @@ package byow.Core;
 import byow.Core.WorldGeneration.WorldGenerator;
 import byow.Core.WorldItems.Avatar;
 import byow.Core.WorldItems.Item;
-import byow.InputDemo.InputSource;
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import edu.princeton.cs.introcs.StdDraw;
 import edu.princeton.cs.introcs.Stopwatch;
+import org.xml.sax.InputSource;
 
 import java.awt.Color;
 import java.io.File;
@@ -23,7 +23,6 @@ import static byow.Core.Direction.*;
 import static byow.TileEngine.Tileset.NOTHING;
 
 public class Engine {
-    /* Feel free to change the width and height. */
     private static final int WIDTH = 80;
     private static final int HEIGHT = 30;
     private Stopwatch stopwatch;
@@ -33,8 +32,7 @@ public class Engine {
     private String name = "";
 
     /**
-     * Method used for exploring a fresh world. This method should handle all inputs,
-     * including inputs from the main menu.
+     * Method used for exploring a fresh world. That uses keyboard to move
      */
     public void interactWithKeyboard() {
         Universe universe = createMainMenu(null);
@@ -111,9 +109,7 @@ public class Engine {
         if (currTime < bestTime) {
             saveFastScore(currTime);
         }
-        System.out.println("This is the line before exitscreen");
-//        System.exit(666);
-        //handle game over
+        System.exit(666);
     }
 
     private void handleExitScreen(Double bestTime) {
@@ -130,20 +126,16 @@ public class Engine {
     }
 
     /**
-     * Method used for autograding and testing your code. The input string will be a series
-     * of characters (for example, "n123sswwdasdassadwas", "n123sss:q", "lwww". The engine should
-     * behave exactly as if the user typed these characters into the engine using
-     * interactWithKeyboard.
-     * <p>
-     * Recall that strings ending in ":q" should cause the game to quite save. For example,
-     * if we do interactWithInputString("n123sss:q"), we expect the game to run the first
+     *
+     * Strings ending in ":q" should cause the game to quite save. For example,
+     * if we do interactWithInputString("n123sss:q"), the game will run the first
      * 7 commands (n123sss) and then quit and save. If we then do
      * interactWithInputString("l"), we should be back in the exact same state.
-     * <p>
+     *
      * In other words, both of these calls:
      * - interactWithInputString("n123sss:q")
      * - interactWithInputString("lww")
-     * <p>
+     *
      * should yield the exact same world state as:
      * - interactWithInputString("n123sssww")
      *
@@ -206,8 +198,12 @@ public class Engine {
     }
 
 
-
-    // 123456789N12345SWWWASD:Q
+    /**
+     * This method handles the movement from an input string
+     * @param universe
+     * @param input string
+     * @param i index of input string
+     */
     // This method is to abstract away handling the moving part of the input string
     private void move(Universe universe, String input, int i) {
         switch (Character.toUpperCase(input.charAt(i))) {

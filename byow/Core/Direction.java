@@ -1,5 +1,8 @@
 package byow.Core;
 
+/**
+ * Data class to represent the direction for Hallway generation
+ */
 public enum Direction {
     LEFT,
     RIGHT,
